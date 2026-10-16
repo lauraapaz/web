@@ -20,6 +20,12 @@
         .grid-fotos img { width: 100%; border-radius: 4px; object-fit: cover; height: 350px; }
         .contacto-info { font-size: 1.1rem; line-height: 1.8; color: #111111; }
         footer { padding: 40px; color: #666; font-size: 0.8rem; }
+        /* Estilos para el visor emergente de fotos */
+.modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); text-align: center; justify-content: center; align-items: center; flex-direction: column; }
+.modal-content { max-width: 85%; max-height: 75vh; border-radius: 4px; object-fit: contain; }
+.modal-buttons { margin-top: 15px; display: flex; gap: 15px; justify-content: center; }
+.modal-btn { padding: 10px 20px; background: #ffffff; color: #111111; text-decoration: none; font-weight: bold; font-size: 0.85rem; border-radius: 4px; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+.modal-btn-close { background: #444444; color: #ffffff; }
     </style>
 </head>
 <body>
@@ -46,24 +52,13 @@
     <!-- SECCIÓN FOTOS -->
     <section id="fotos">
         <h2>FOTOS</h2>
-           <div class="grid-fotos">
-    <a href="Laura Apaz 01.jpeg" target="_blank" download title="Descargar foto">
-        <img src="Laura Apaz 01.jpeg" alt="Laura Apaz - Retrato">
-    </a>
-    <a href="Laura Apaz_.jpg" target="_blank" download title="Descargar foto">
-        <img src="Laura Apaz_.jpg" alt="Laura Apaz - Retrato">
-    </a>
-    <a href="Laura Apaz_01.jpg" target="_blank" download title="Descargar foto">
-        <img src="Laura Apaz_01.jpg" alt="Laura Apaz - Plano entero">
-    </a>
-    <a href="Laura_Apaz_primer_plano.jpg" target="_blank" download title="Descargar foto">
-        <img src="Laura_Apaz_primer_plano.jpg" alt="Laura Apaz">
-    </a>
-    <a href="Laura_Apaz_plano_medio.jpg" target="_blank" download title="Descargar foto">
-        <img src="Laura_Apaz_plano_medio.jpg" alt="Laura Apaz">
-    </a>
+          <div class="grid-fotos">
+    <img src="Laura Apaz_05.jpg" alt="Laura Apaz - Retrato" onclick="abrirFoto(this.src)" style="cursor:pointer;">
+    <img src="Laura Apaz_.jpg" alt="Laura Apaz - Retrato" onclick="abrirFoto(this.src)" style="cursor:pointer;">
+    <img src="Laura Apaz_01.jpg" alt="Laura Apaz - Plano entero" onclick="abrirFoto(this.src)" style="cursor:pointer;">
+    <img src="Laura_Apaz_primer_plano.jpg" alt="Laura Apaz" onclick="abrirFoto(this.src)" style="cursor:pointer;">
+    <img src="Laura_Apaz_plano_medio.jpg" alt="Laura Apaz" onclick="abrirFoto(this.src)" style="cursor:pointer;">
 </div>
-        </div>
     </section>
 
     <!-- SECCIÓN CV -->
@@ -86,6 +81,29 @@
     <footer>
         &copy; 2026 Laura Apaz. Todos los derechos reservados.
     </footer>
+<!-- VISOR EMERGENTE DE FOTOS -->
+<div id="miModal" class="modal" onclick="cerrarFoto(event)">
+    <img id="imgModal" class="modal-content">
+    <div class="modal-buttons">
+        <a id="btnDescargar" class="modal-btn" download target="_blank">Descargar foto</a>
+        <button class="modal-btn modal-btn-close" onclick="cerrarModalDirecto()">Cerrar</button>
+    </div>
+</div>
 
+<script>
+function abrirFoto(ruta) {
+    document.getElementById("imgModal").src = ruta;
+    document.getElementById("btnDescargar").href = ruta;
+    document.getElementById("miModal").style.display = "flex";
+}
+function cerrarModalDirecto() {
+    document.getElementById("miModal").style.display = "none";
+}
+function cerrarFoto(e) {
+    if (e.target.id === "miModal") {
+        document.getElementById("miModal").style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
